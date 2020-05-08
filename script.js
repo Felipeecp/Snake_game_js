@@ -23,7 +23,28 @@ function createSnake(){
     }
 }
 
+document.addEventListener("keydown", update); //pega o keydown(evento de clique) e chama o update
+
+function update (event){
+    if(event.keyCode == 37 && direction != "right") direction = "left"
+    if(event.keyCode == 38 && direction != "down") direction = "up"
+    if(event.keyCode == 39 && direction != "left") direction = "right"
+    if(event.keyCode == 40 && direction != "up") direction = "down" 
+}
+
 function iniciarJogo(){
+    if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0 //se a posição da cobra for maior que
+    //o tamanho do background na direção direita, a cobra reaparece no lado esquerdo
+    
+    if(snake[0].x < 0 && direction == "left")snake[0].x = 16 * box //se a posição da cobra for maior que
+    //o tamanho do background na direção esquerda, a cobra reaparece no lado direito
+    
+    if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0 //se a posição da cobra for maior que
+    //o tamanho do background para baixo, a cobra reaparece em cima.
+    
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16*box //se a posição da cobra for maior que
+    //o tamanho do backgroun para cima, a cobra reaparece em baixo
+    
     createBG();
     createSnake();
 
@@ -43,7 +64,7 @@ function iniciarJogo(){
         y: snakeY
     }
 
-    snake.unshift(newHead);
+    snake.unshift(newHead); //metodo unshift sempre acrecenta 1 no primeiro elemento
 
 }
 
