@@ -42,6 +42,7 @@ function update (event){
 }
 
 function iniciarJogo(){
+
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0 //se a posição da cobra for maior que
     //o tamanho do background na direção direita, a cobra reaparece no lado esquerdo
     
@@ -54,6 +55,14 @@ function iniciarJogo(){
     if(snake[0].y < 0 && direction == "up") snake[0].y = 16*box //se a posição da cobra for maior que
     //o tamanho do backgroun para cima, a cobra reaparece em baixo
     
+    for(i = 1; i < snake.length; i++){
+        if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
+            clearInterval(jogo);
+            alert('Game Over :(');
+        }
+    }
+
+
     createBG();
     createSnake();
     createFood();
