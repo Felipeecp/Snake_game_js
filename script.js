@@ -8,7 +8,10 @@ snake[0] = {
 } //tamanho da cobrinha
 
 let direction = "right";
-
+let food = {
+    x: Math.floor(Math.random() * 15 + 1) * box, //cria a comida em um local aleatorio em relação ao eixo x
+    y: Math.floor(Math.random() * 15 + 1) * box //cria a comida em um local aleatorio em relação ao eixo y
+}
 
 
 function createBG(){
@@ -22,6 +25,12 @@ function createSnake(){
         context.fillRect(snake[i].x, snake[i].y, box, box) //desenha a cobrinha
     }
 }
+
+function createFood(){
+    context.fillStyle = "green"
+    context.fillRect(food.x,food.y,box,box);
+}
+
 
 document.addEventListener("keydown", update); //pega o keydown(evento de clique) e chama o update
 
@@ -47,7 +56,7 @@ function iniciarJogo(){
     
     createBG();
     createSnake();
-
+    createFood();
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
