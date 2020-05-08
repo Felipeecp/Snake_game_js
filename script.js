@@ -7,6 +7,9 @@ snake[0] = {
     y: 8 * box
 } //tamanho da cobrinha
 
+let direction = "right";
+
+
 
 function createBG(){
     context.fillStyle = 'lightgreen'; 
@@ -20,6 +23,28 @@ function createSnake(){
     }
 }
 
+function iniciarJogo(){
+    createBG();
+    createSnake();
 
-createBG()
-createSnake()
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if(direction == "right") snakeX += box; //se a direção for igual a right, sera adicionado a snakeX uma box
+    if(direction == "left") snakeX -= box; //se a direção for igual a left, sera removido uma box de snakeX
+    if(direction == "up") snakeY -= box; //se a direção for igual a up, sera removido uma box de snakeY 
+    if(direction == "down") snakeY += box; //se a direção for igual a down, sera adicionado uma box a snakeX
+    //esse conjunto de codigos fazem uma ilusão de movimento da cobrinha
+
+    snake.pop();
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+
+}
+
+let jogo = setInterval(iniciarJogo, 100); //intervalo de 100 milisegundos para a função iniciarJogo se renovar
